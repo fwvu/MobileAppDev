@@ -1,5 +1,6 @@
 package com.example.mobileappdev
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -14,6 +15,10 @@ class MainDashboard : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
+    private val searchActivity by lazy {
+        Intent(this, CourseSearch::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dashboard)
@@ -27,7 +32,8 @@ class MainDashboard : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_courses -> {
-                    replaceFragment(CoursesFragment())
+                    //replaceFragment(CoursesFragment())
+                    startActivity(searchActivity)
                     true
                 }
                 R.id.bottom_schedule -> {

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MobileAppDev"
         tools:targetApi="31">
         <activity
+            android:name=".CourseSearch"
+            android:exported="false" />
+        <activity
             android:name=".MainDashboard"
             android:exported="false" />
         <activity
