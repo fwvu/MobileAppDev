@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/bottom_current"
+        android:icon="@drawable/book_24"
+        android:title="Current" />
+
+    <item
+        android:id="@+id/bottom_calender"
+        android:icon="@drawable/calendar_24"
+        android:title="Calender" />
+
+    <item
+        android:id="@+id/bottom_profile"
+        android:icon="@drawable/person_24"
+        android:title="Profile" />
+
+</menu>

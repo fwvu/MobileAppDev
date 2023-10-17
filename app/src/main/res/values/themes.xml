@@ -2,8 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MobileAppDev" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/appGreen</item>
+        <item name="colorPrimaryVariant">@color/appGreen</item>
+        <item name="android:statusBarColor">@color/appGreen</item>
     </style>
 
     <style name="Theme.MobileAppDev" parent="Base.Theme.MobileAppDev" />
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/buttonYellow</item>
+    </style>
+
 </resources>
