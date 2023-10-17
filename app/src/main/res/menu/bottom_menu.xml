@@ -7,12 +7,12 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/bottom_current"
+        android:id="@+id/bottom_courses"
         android:icon="@drawable/book_24"
         android:title="Current" />
 
     <item
-        android:id="@+id/bottom_calender"
+        android:id="@+id/bottom_schedule"
         android:icon="@drawable/calendar_24"
         android:title="Calender" />
 

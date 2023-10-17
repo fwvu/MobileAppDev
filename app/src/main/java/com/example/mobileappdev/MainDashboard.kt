@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.mobileappdev.fragments.CalenderFragment
+import com.example.mobileappdev.fragments.CoursesFragment
+import com.example.mobileappdev.fragments.ScheduleFragment
 import com.example.mobileappdev.fragments.HomeFragment
 import com.example.mobileappdev.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,13 +26,13 @@ class MainDashboard : AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     true
                 }
-                R.id.bottom_current -> {
-                    //replaceFragment(CurrentFragment())
-                    Toast.makeText(this,"Not yet implemented", Toast.LENGTH_SHORT).show()
+                R.id.bottom_courses -> {
+                    replaceFragment(CoursesFragment())
                     true
                 }
-                R.id.bottom_calender -> {
-                    replaceFragment(CalenderFragment())
+                R.id.bottom_schedule -> {
+                    replaceFragment(ScheduleFragment())
+                    Toast.makeText(this,"Not yet implemented", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.bottom_profile -> {
