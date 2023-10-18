@@ -5,18 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.mobileappdev.course_search.CourseSearch
+import com.example.mobileappdev.course_search.CourseSearchActivity
 import com.example.mobileappdev.fragments.ScheduleFragment
 import com.example.mobileappdev.fragments.HomeFragment
 import com.example.mobileappdev.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainDashboard : AppCompatActivity() {
+class MainDashboardActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
     private val searchActivity by lazy {
-        Intent(this, CourseSearch::class.java)
+        Intent(this, CourseSearchActivity::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

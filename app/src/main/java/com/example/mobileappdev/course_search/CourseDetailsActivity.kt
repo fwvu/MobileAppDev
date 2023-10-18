@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.example.mobileappdev.R
 import com.example.mobileappdev.models.CourseList
 
-class CourseDetails : AppCompatActivity() {
+class CourseDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_details)

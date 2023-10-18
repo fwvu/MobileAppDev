@@ -11,7 +11,7 @@ import com.example.mobileappdev.adapters.CourseAdapter
 import com.example.mobileappdev.models.CourseList
 import java.util.Locale
 
-class CourseSearch : AppCompatActivity() {
+class CourseSearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cAdapter: CourseAdapter
@@ -148,7 +148,7 @@ class CourseSearch : AppCompatActivity() {
         recyclerView.adapter = cAdapter
 
         cAdapter.onItemClick ={
-            val intent = Intent(this, CourseDetails::class.java)
+            val intent = Intent(this, CourseDetailsActivity::class.java)
             intent.putExtra("android", it)
             startActivity(intent)
         }

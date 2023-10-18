@@ -13,13 +13,16 @@
         android:theme="@style/Theme.MobileAppDev"
         tools:targetApi="31">
         <activity
-            android:name=".course_search.CourseDetails"
+            android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".course_search.CourseSearch"
+            android:name=".course_search.CourseDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainDashboard"
+            android:name=".course_search.CourseSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
