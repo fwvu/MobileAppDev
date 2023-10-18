@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.mobileappdev.fragments.CoursesFragment
+import com.example.mobileappdev.course_search.CourseSearch
 import com.example.mobileappdev.fragments.ScheduleFragment
 import com.example.mobileappdev.fragments.HomeFragment
 import com.example.mobileappdev.fragments.ProfileFragment
