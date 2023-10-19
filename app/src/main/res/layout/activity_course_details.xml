@@ -6,28 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".course_search.CourseDetailsActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/courseDetailsCard"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/appGreen"
-        app:cardCornerRadius="20dp"
-        android:elevation="8dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/courseDetailsButtonBox">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/courseNameCard"
+                android:id="@+id/courseDetailsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/appGreen"
+                app:cardCornerRadius="20dp"
                 android:elevation="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,221 +34,234 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/courseTitleHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Title:"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="20dp"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/courseNameCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="8dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/courseTitleText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Info"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/courseTitleHeading"
-                        app:layout_constraintTop_toTopOf="parent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/courseTitleHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Title:"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="20dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+                            <TextView
+                                android:id="@+id/courseTitleText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Info"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="5dp"
+                                app:layout_constraintStart_toEndOf="@id/courseTitleHeading"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/courseCodeCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/courseNameCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/courseCodeHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Course Code:"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="20dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+                            <TextView
+                                android:id="@+id/courseCodeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Info"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="5dp"
+                                app:layout_constraintStart_toEndOf="@id/courseCodeHeading"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/courseInstructorCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/courseCodeCard"
+
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/courseInstructorHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Instructor:"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="20dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+                            <TextView
+                                android:id="@+id/courseInstructorText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Info"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="5dp"
+                                app:layout_constraintStart_toEndOf="@id/courseInstructorHeading"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:gravity="center_vertical"
+                                />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseCodeCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp"
-                android:elevation="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/courseNameCard">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/courseCodeHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Course Code:"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
-
-                    <TextView
-                        android:id="@+id/courseCodeText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Info"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/courseCodeHeading"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseInstructorCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp"
-                android:elevation="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/courseCodeCard"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/courseInstructorHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Instructor:"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
-
-                    <TextView
-                        android:id="@+id/courseInstructorText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Info"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/courseInstructorHeading"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:gravity="center_vertical"
-                        />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/courseDescriptionCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:backgroundTint="@color/appGreen"
-        app:cardCornerRadius="20dp"
-        android:elevation="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/courseDetailsCard">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <androidx.cardview.widget.CardView
+                android:id="@+id/courseDescriptionCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="10dp"
-                app:cardCornerRadius="10dp"
+                android:backgroundTint="@color/appGreen"
+                app:cardCornerRadius="20dp"
                 android:elevation="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/courseDetailsCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/courseDescriptionHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Course Description:"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="20dp"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="8dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:gravity="center_vertical"
-                        />
+                        app:layout_constraintBottom_toBottomOf="parent">
 
-                    <TextView
-                        android:id="@+id/courseDescriptionText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="Info"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                            <TextView
+                                android:id="@+id/courseDescriptionHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Course Description:"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="20dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center_vertical"
+                                />
 
-                        app:layout_constraintTop_toBottomOf="@id/courseDescriptionHeading"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                            <TextView
+                                android:id="@+id/courseDescriptionText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Info"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="5dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/courseDescriptionHeading"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
 
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
             </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
         android:id="@+id/coursePrerequisitesCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -287,7 +297,7 @@
                     <TextView
                         android:id="@+id/coursePrerequisitesHeading"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:text="Course Prerequisites:"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -302,7 +312,7 @@
                     <TextView
                         android:id="@+id/coursePrerequisitesText"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:text="Info"
                         android:textSize="16sp"
                         android:textColor="@color/black"
@@ -325,7 +335,12 @@
 
     </androidx.cardview.widget.CardView>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/courseDetailsButtonBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/appGreen"
