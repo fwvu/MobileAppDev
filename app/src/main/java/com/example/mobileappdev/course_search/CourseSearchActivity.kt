@@ -32,7 +32,7 @@ class CourseSearchActivity : AppCompatActivity() {
 
         courseTitle = arrayOf(
             "Course 1",
-            "Course 2",
+            "xyz Course 2",
             "Course 3",
             "Course 4",
             "Course 5",
@@ -64,7 +64,7 @@ class CourseSearchActivity : AppCompatActivity() {
         courseInstructor = arrayOf(
             "Course 1",
             "Course 2",
-            "Course 3",
+            "xyz Course 3",
             "Course 4",
             "Course 5",
             "Course 6",
@@ -84,7 +84,7 @@ class CourseSearchActivity : AppCompatActivity() {
             "course description 4",
             "course description 5",
             "course description 6",
-            "course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7",
+            "xzy course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7",
             "course description 8",
             "course description 9",
             "course description 10",
@@ -130,7 +130,9 @@ class CourseSearchActivity : AppCompatActivity() {
                 val searchText = newText!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()){
                     courseArrayList.forEach {
-                        if (it.dataCourseTitle.lowercase(Locale.getDefault()).contains(searchText)) {
+                        if ((it.dataCourseTitle.lowercase(Locale.getDefault()).contains(searchText))
+                            || (it.dataCourseInstructor.lowercase(Locale.getDefault()).contains(searchText))
+                            || (it.dataCourseDescription.lowercase(Locale.getDefault()).contains(searchText))){
                             searchList.add(it)
                         }
                     }
