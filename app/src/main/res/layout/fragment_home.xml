@@ -61,7 +61,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/courseRecommendationCard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:backgroundTint="@color/cardGrey"
@@ -73,13 +73,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
+                    android:layout_margin="10dp"
                     app:cardCornerRadius="10dp"
                     android:elevation="8dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,35 +88,36 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/courseRecommendationHeading"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="30dp"
+                            android:background="@color/appGreen"
                             android:text="Course Recommendations"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:layout_marginStart="20dp"
+                            android:textAlignment="center"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:gravity="center_vertical"
-                            />
+                            app:layout_constraintTop_toTopOf="parent"/>
 
-                        <TextView
-                            android:id="@+id/courseRecommendationText"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:text="Info"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"
-                            android:layout_marginStart="5dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/courseRecommendationHeading"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/courseRecommendationHeading">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/courseRVHome"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"/>
+
+                        </FrameLayout>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

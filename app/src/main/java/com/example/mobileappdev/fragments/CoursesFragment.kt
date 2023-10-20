@@ -89,7 +89,5 @@ class CoursesFragment : Fragment() {
             intent.putExtra("courseInfoLarge", courseList)
             requireActivity().startActivity(intent)
         }
-
     }
-
 }
