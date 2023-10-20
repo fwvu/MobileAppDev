@@ -3,120 +3,55 @@ package com.example.mobileappdev.course_search
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileappdev.R
 import com.example.mobileappdev.adapters.CourseAdapter
+import com.example.mobileappdev.api.CourseDetailApi
 import com.example.mobileappdev.models.CourseList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.Locale
 
 class CourseSearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cAdapter: CourseAdapter
-    private lateinit var courseArrayList: ArrayList<CourseList>
-
-    lateinit var courseTitle: Array<String>
-    lateinit var courseCode: Array<String>
-    lateinit var courseInstructor: Array<String>
-    lateinit var courseDescription: Array<String>
-    lateinit var coursePrerequisites: Array<String>
+    private lateinit var courseArrayList: ArrayList<CourseList> // Full course list
+    private lateinit var courseArrayTitlesList: ArrayList<String> // List of dataCourseTitle
 
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<CourseList>
 
+    // retrofit builder
+    private val retrofitObj by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://320e-115-166-11-141.ngrok-free.app")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_search)
-
-        courseTitle = arrayOf(
-            "Course 1",
-            "xyz Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
-        courseCode = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
-
-        courseInstructor = arrayOf(
-            "Course 1",
-            "Course 2",
-            "xyz Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
-
-        courseDescription = arrayOf(
-            "course description 1",
-            "course description 2",
-            "course description 3",
-            "course description 4",
-            "course description 5",
-            "course description 6",
-            "xzy course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7",
-            "course description 8",
-            "course description 9",
-            "course description 10",
-            "course description 11",
-            "course description 12",
-            "course description 13"
-        )
-        coursePrerequisites = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7course description 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
-
 
         recyclerView = findViewById(R.id.courseRV2)
         searchView = findViewById(R.id.search)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        courseArrayList = arrayListOf<CourseList>()
-        searchList = arrayListOf<CourseList>()
-        dataInitializer()
+        // have to initialize the array here for null safety
+        courseArrayList = ArrayList()
+        courseArrayTitlesList = ArrayList()
+        searchList = ArrayList()
+
+        // Initialize the adapter but don't set it to the RecyclerView yet
+        cAdapter = CourseAdapter(searchList)
 
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
@@ -125,6 +60,7 @@ class CourseSearchActivity : AppCompatActivity() {
                 return true
             }
 
+            // setup conditions for searchView to test
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchList.clear()
                 val searchText = newText!!.lowercase(Locale.getDefault())
@@ -132,7 +68,8 @@ class CourseSearchActivity : AppCompatActivity() {
                     courseArrayList.forEach {
                         if ((it.dataCourseTitle.lowercase(Locale.getDefault()).contains(searchText))
                             || (it.dataCourseInstructor.lowercase(Locale.getDefault()).contains(searchText))
-                            || (it.dataCourseDescription.lowercase(Locale.getDefault()).contains(searchText))){
+                            || (it.dataCourseDescription.lowercase(Locale.getDefault()).contains(searchText))
+                            ){
                             searchList.add(it)
                         }
                     }
@@ -146,24 +83,37 @@ class CourseSearchActivity : AppCompatActivity() {
             }
         })
 
-        cAdapter = CourseAdapter(searchList)
-        recyclerView.adapter = cAdapter
+        // retrieve the data from the api and add it too the courseArrayList
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                // create object of retrofit
+                val api = retrofitObj.create(CourseDetailApi::class.java)
+                val courseDetails = api.getCourseDetails()
+                // Log.d("MelbAPPDemo", "Response received: $courseDetails")
+
+                // Populate the full course list
+                courseArrayList.clear() // Clear existing data if needed
+                courseArrayList.addAll(courseDetails)
+                searchList.addAll(courseArrayList)
+
+                // Populate the list of dataCourseTitle
+                courseArrayTitlesList.clear() // Clear existing data if needed
+                val courseTitles = courseDetails.map { it.dataCourseTitle }
+                courseArrayTitlesList.addAll(courseTitles)
+                // Set the adapter and notify it to refresh the RecyclerView
+                recyclerView.adapter = cAdapter
+                // Notify the adapter to update the RecyclerView with courseTitles
+                cAdapter.notifyDataSetChanged()
+
+            } catch (e: Exception) {
+                Log.e("MelbAPPDemo", "Error: ${e.message}")
+            }
+        }
 
         cAdapter.onItemClick ={
             val intent = Intent(this, CourseDetailsActivity::class.java)
-            intent.putExtra("android", it)
+            intent.putExtra("courseInfoLarge", it)
             startActivity(intent)
         }
-    }
-
-    private fun dataInitializer(){
-        for (i in courseTitle.indices){
-            val course = CourseList(courseTitle[i], courseCode[i], courseInstructor[i], courseDescription[i], coursePrerequisites[i])
-            courseArrayList.add(course)
-        }
-
-        searchList.addAll(courseArrayList)
-        recyclerView.adapter = CourseAdapter(searchList)
-
     }
 }

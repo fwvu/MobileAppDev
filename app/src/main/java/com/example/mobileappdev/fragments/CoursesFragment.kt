@@ -1,5 +1,6 @@
 package com.example.mobileappdev.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileappdev.R
 import com.example.mobileappdev.adapters.CourseAdapter
 import com.example.mobileappdev.api.CourseDetailApi
+import com.example.mobileappdev.course_search.CourseDetailsActivity
 import com.example.mobileappdev.models.CourseList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +47,7 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // create object of retrofit
         val api = retrofitObj.create(CourseDetailApi::class.java)
         val layoutManager = LinearLayoutManager(context)
 
@@ -81,6 +84,12 @@ class CoursesFragment : Fragment() {
                 Log.e("MelbAPPDemo", "Error: ${e.message}")
             }
         }
+        cAdapter.onItemClick = { courseList ->
+            val intent = Intent(requireContext(), CourseDetailsActivity::class.java) // requireContext used to get proper context
+            intent.putExtra("courseInfoLarge", courseList)
+            requireActivity().startActivity(intent)
+        }
+
     }
 
 }

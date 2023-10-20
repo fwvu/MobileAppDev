@@ -11,7 +11,7 @@ class CourseDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_details)
 
-        val getData = intent.getParcelableExtra<CourseList>("android")
+        val getData = intent.getParcelableExtra<CourseList>("courseInfoLarge")
         if (getData != null){
             val courseTitle: TextView = findViewById(R.id.courseTitleText)
             val courseCode: TextView = findViewById(R.id.courseCodeText)
