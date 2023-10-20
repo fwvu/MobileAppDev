@@ -64,26 +64,27 @@ class HomeFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val courseDetails = api.getCourseDetails()
-                // Log.d("MelbAPPDemo", "Response received: $courseDetails")
-
-
-                // Populate the full course list
-                courseArrayList.clear() // Clear existing data if needed
-                courseArrayList.addAll(courseDetails)
-
-                // Populate the list of dataCourseTitle
-                courseArrayTitlesList.clear() // Clear existing data if needed
-                val courseTitles = courseDetails.map { it.dataCourseTitle }
-                courseArrayTitlesList.addAll(courseTitles)
-
-                // Notify the adapter to update the RecyclerView with courseTitles
-                cAdapter.notifyDataSetChanged()
-
+                val filter = "0"
+                val response = api.getFilteredCourses(filter).execute()
+                if (response.isSuccessful) {
+                    val courseDetails = response.body()
+                    if (courseDetails != null) {
+                        // Log the data to ensure you received it
+                        Log.d("MelbAPPDemo", "Received ${courseDetails.size} course details")
+                        courseArrayList.clear()
+                        courseArrayList.addAll(courseDetails)
+                        cAdapter.notifyDataSetChanged()
+                    } else {
+                        Log.e("MelbAPPDemo", "Course details are null")
+                    }
+                } else {
+                    Log.e("MelbAPPDemo", "API call not successful: ${response.message()}")
+                }
             } catch (e: Exception) {
                 Log.e("MelbAPPDemo", "Error: ${e.message}")
             }
         }
+
         cAdapter.onItemClick = { courseList ->
             val intent = Intent(requireContext(), CourseDetailsActivity::class.java) // requireContext used to get proper context
             intent.putExtra("courseInfoLarge", courseList)
