@@ -1,6 +1,7 @@
 package com.example.mobileappdev.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +10,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileappdev.R
 import com.example.mobileappdev.adapters.CourseAdapter
+import com.example.mobileappdev.api.CourseDetailApi
 import com.example.mobileappdev.models.CourseList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class CoursesFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cAdapter: CourseAdapter
-    private lateinit var courseArrayList: ArrayList<CourseList>
+    private lateinit var courseArrayList: ArrayList<CourseList> // Full course list
+    private lateinit var courseArrayTitlesList: ArrayList<String> // List of dataCourseTitle
 
-    lateinit var courseTitle: Array<String>
-    lateinit var courseCode: Array<String>
-    lateinit var courseInstructor: Array<String>
-    lateinit var courseDescription: Array<String>
-    lateinit var coursePrerequisites: Array<String>
+
+    // retrofit builder
+    private val retrofitObj by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://320e-115-166-11-141.ngrok-free.app")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,100 +44,43 @@ class CoursesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataInitializer()
+
+        val api = retrofitObj.create(CourseDetailApi::class.java)
         val layoutManager = LinearLayoutManager(context)
+
         recyclerView = view.findViewById(R.id.courseRV)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
+
+        // have to initialize the array here for null safety
+        courseArrayList = ArrayList()
+        courseArrayTitlesList = ArrayList()
+
         cAdapter = CourseAdapter(courseArrayList)
         recyclerView.adapter = cAdapter
-    }
 
-    private fun dataInitializer(){
-        courseArrayList = arrayListOf()
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val courseDetails = api.getCourseDetails()
+                // Log.d("MelbAPPDemo", "Response received: $courseDetails")
 
-        courseTitle = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
-        courseCode = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
 
-        courseInstructor = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
+                // Populate the full course list
+                courseArrayList.clear() // Clear existing data if needed
+                courseArrayList.addAll(courseDetails)
 
-        courseDescription = arrayOf(
-            "course description 1",
-            "course description 2",
-            "course description 3",
-            "course description 4",
-            "course description 5",
-            "course description 6",
-            "course description 7",
-            "course description 8",
-            "course description 9",
-            "course description 10",
-            "course description 11",
-            "course description 12",
-            "course description 13"
-        )
-        coursePrerequisites = arrayOf(
-            "Course 1",
-            "Course 2",
-            "Course 3",
-            "Course 4",
-            "Course 5",
-            "Course 6",
-            "Course 7",
-            "Course 8",
-            "Course 9",
-            "Course 10",
-            "Course 11",
-            "Course 12",
-            "Course 13"
-        )
+                // Populate the list of dataCourseTitle
+                courseArrayTitlesList.clear() // Clear existing data if needed
+                val courseTitles = courseDetails.map { it.dataCourseTitle }
+                courseArrayTitlesList.addAll(courseTitles)
 
-        for (i in courseTitle.indices){
-            val course = CourseList(courseTitle[i], courseCode[i], courseInstructor[i], courseDescription[i], coursePrerequisites[i])
-            courseArrayList.add(course)
+                // Notify the adapter to update the RecyclerView with courseTitles
+                cAdapter.notifyDataSetChanged()
+
+            } catch (e: Exception) {
+                Log.e("MelbAPPDemo", "Error: ${e.message}")
+            }
         }
-
     }
+
 }

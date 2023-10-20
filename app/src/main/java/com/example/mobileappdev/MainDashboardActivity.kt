@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mobileappdev.course_search.CourseSearchActivity
+import com.example.mobileappdev.fragments.CoursesFragment
 import com.example.mobileappdev.fragments.ScheduleFragment
 import com.example.mobileappdev.fragments.HomeFragment
 import com.example.mobileappdev.fragments.ProfileFragment
@@ -25,6 +26,7 @@ class MainDashboardActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById(R.id.bottom_nav)
 
+        // bottom nav bar and the links
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.bottom_home -> {
@@ -42,7 +44,8 @@ class MainDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_profile -> {
-                    replaceFragment(ProfileFragment())
+                    //replaceFragment(ProfileFragment())
+                    replaceFragment(CoursesFragment())
                     true
                 }
                 else -> false

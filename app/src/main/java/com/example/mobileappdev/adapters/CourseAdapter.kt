@@ -13,7 +13,9 @@ class CourseAdapter (private val courseList: ArrayList<CourseList>): RecyclerVie
     var onItemClick: ((CourseList) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
+
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.course_item_layout, parent, false)
+
         return CourseViewHolder(itemView)
     }
 
@@ -22,7 +24,9 @@ class CourseAdapter (private val courseList: ArrayList<CourseList>): RecyclerVie
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
+
         val currentItem = courseList[position]
+
         holder.rvTitle.text = currentItem.dataCourseTitle
 
         holder.itemView.setOnClickListener {
