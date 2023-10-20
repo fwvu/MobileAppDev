@@ -59,35 +59,49 @@ class HomeFragment : Fragment() {
         courseArrayList = ArrayList()
         courseArrayTitlesList = ArrayList()
 
+        // call fetchFilteredCourses() to load filtered courses
+        fetchFilteredCourses()
+
         cAdapter = CourseAdapter(courseArrayList)
         recyclerView.adapter = cAdapter
 
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val courseDetails = api.getCourseDetails()
-                // Log.d("MelbAPPDemo", "Response received: $courseDetails")
 
-
-                // Populate the full course list
-                courseArrayList.clear() // Clear existing data if needed
-                courseArrayList.addAll(courseDetails)
-
-                // Populate the list of dataCourseTitle
-                courseArrayTitlesList.clear() // Clear existing data if needed
-                val courseTitles = courseDetails.map { it.dataCourseTitle }
-                courseArrayTitlesList.addAll(courseTitles)
-
-                // Notify the adapter to update the RecyclerView with courseTitles
-                cAdapter.notifyDataSetChanged()
-
-            } catch (e: Exception) {
-                Log.e("MelbAPPDemo", "Error: ${e.message}")
-            }
-        }
         cAdapter.onItemClick = { courseList ->
             val intent = Intent(requireContext(), CourseDetailsActivity::class.java) // requireContext used to get proper context
             intent.putExtra("courseInfoLarge", courseList)
             requireActivity().startActivity(intent)
+        }
+    }
+
+    private fun fetchFilteredCourses() {
+        val api = retrofitObj.create(CourseDetailApi::class.java)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                // Make an API call to fetch all course details
+                val allCourseDetails = api.getCourseDetails()
+
+                // Filter courses that contain "0" in any of the string fields
+                val filteredCourses = allCourseDetails.filter { course ->
+                    course.dataCourseTitle.contains("0") ||
+                            course.dataCourseCode.contains("0") ||
+                            course.dataCourseDescription.contains("0")
+                }
+
+                // Populate the full course list with filtered data
+                courseArrayList.clear()
+                courseArrayList.addAll(filteredCourses)
+
+                // Populate the list of dataCourseTitle
+                courseArrayTitlesList.clear()
+                val courseTitles = filteredCourses.map { it.dataCourseTitle }
+                courseArrayTitlesList.addAll(courseTitles)
+
+                // Notify the adapter to update the RecyclerView with courseTitles
+                cAdapter.notifyDataSetChanged()
+            } catch (e: Exception) {
+                Log.e("MelbAPPDemo", "Error fetching filtered courses: ${e.message}")
+            }
         }
     }
 }
