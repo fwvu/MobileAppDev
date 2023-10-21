@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
+import com.example.mobileappdev.BaseUrlSingleton
 import com.example.mobileappdev.MainDashboardActivity
 import com.example.mobileappdev.R
 import com.example.mobileappdev.api.LoginApi
@@ -24,10 +25,10 @@ class LoginActivity : AppCompatActivity() {
     private var pass = ""
 
     // retrofit builder
-    //private val apiUrl = Base_Url_Singleton.baseUrl
+    private val apiUrl = BaseUrlSingleton.baseUrl
     private val retrofitObj by lazy {
         Retrofit.Builder()
-            .baseUrl("https://be52-115-166-11-141.ngrok-free.app")
+            .baseUrl(apiUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
