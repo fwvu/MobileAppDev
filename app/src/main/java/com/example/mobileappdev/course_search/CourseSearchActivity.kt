@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileappdev.R
 import com.example.mobileappdev.adapters.CourseAdapter
 import com.example.mobileappdev.api.CourseDetailApi
+import com.example.mobileappdev.Base_Url_Singleton
 import com.example.mobileappdev.models.CourseList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,9 +30,10 @@ class CourseSearchActivity : AppCompatActivity() {
     private lateinit var searchList: ArrayList<CourseList>
 
     // retrofit builder
+    private val apiUrl = Base_Url_Singleton.baseUrl
     private val retrofitObj by lazy {
         Retrofit.Builder()
-            .baseUrl("https://320e-115-166-11-141.ngrok-free.app")
+            .baseUrl(apiUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
