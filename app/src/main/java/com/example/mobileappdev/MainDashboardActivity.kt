@@ -44,8 +44,8 @@ class MainDashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_profile -> {
-                    //replaceFragment(ProfileFragment())
-                    replaceFragment(CoursesFragment())
+                    replaceFragment(ProfileFragment())
+                    //replaceFragment(CoursesFragment())
                     true
                 }
                 else -> false

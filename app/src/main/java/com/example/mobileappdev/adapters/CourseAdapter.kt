@@ -24,7 +24,6 @@ class CourseAdapter (private val courseList: ArrayList<CourseList>): RecyclerVie
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
 
         val currentItem = courseList[position]
-
         holder.rvTitle.text = currentItem.dataCourseTitle
 
         holder.itemView.setOnClickListener {

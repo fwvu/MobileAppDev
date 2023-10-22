@@ -3,8 +3,13 @@ package com.example.mobileappdev.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class CourseList(var dataCourseTitle:String, val dataCourseCode:String, val dataCourseInstructor:String, val dataCourseDescription:String, val dataCoursePrerequisites:String):
-    Parcelable {
+data class CourseList(
+    var dataCourseTitle:String,
+    val dataCourseCode:String,
+    val dataCourseInstructor:String,
+    val dataCourseDescription:String,
+    val dataCoursePrerequisites:String): Parcelable {
+
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
