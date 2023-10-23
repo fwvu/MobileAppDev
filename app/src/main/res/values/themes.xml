@@ -13,4 +13,11 @@
         <item name="android:color">@color/buttonYellow</item>
     </style>
 
+    <style name="Theme.App.SplashScreen" parent="Base.Theme.MobileAppDev">
+        <item name="windowSplashScreenBackground">@color/appGreen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/person_24</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.MobileAppDev</item>
+
+    </style>
+
 </resources>
