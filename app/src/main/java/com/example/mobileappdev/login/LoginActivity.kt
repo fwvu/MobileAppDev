@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
 import com.example.mobileappdev.BaseUrlSingleton
@@ -44,6 +45,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Thread.sleep(2000)
+        installSplashScreen()
+
+
         setContentView(R.layout.activity_login)
 
         loginResponseLiveData.observe(this) { response ->
