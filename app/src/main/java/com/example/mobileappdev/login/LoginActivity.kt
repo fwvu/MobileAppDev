@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
         val uName = getUserData?.username
         val uStudentid = getUserData?.studentid
         val uEmail = getUserData?.email
-        val uPhone = getUserData?.phonenumber
+        val uPhone = getUserData?.phone
 
         if (uName != null) {
             val sharedPreferences: SharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE)

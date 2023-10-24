@@ -6,7 +6,7 @@ data class LoginResponse(
     val username: String? = null,
     val studentid: String? = null,
     val email: String? = null,
-    val phonenumber: String? = null
+    val phone: String? = null
 )
 
 
