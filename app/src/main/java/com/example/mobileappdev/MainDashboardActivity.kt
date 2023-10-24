@@ -1,8 +1,11 @@
 package com.example.mobileappdev
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mobileappdev.course_search.CourseSearchActivity
@@ -23,6 +26,8 @@ class MainDashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dashboard)
+
+        loadUserData()
 
         bottomNavigationView = findViewById(R.id.bottom_nav)
 
@@ -56,5 +61,19 @@ class MainDashboardActivity : AppCompatActivity() {
     }
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.fragment_wrapper, fragment).commit()
+    }
+
+    private fun loadUserData(){
+        // retrieve data from shard preferences
+        val sharedPreferences: SharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE)
+        val currentUserName:String? = sharedPreferences.getString("USERNAME_KEY", "User")
+        val currentUserStudentid:String? = sharedPreferences.getString("USERSTUDENTID_KEY", "Student ID")
+
+        // adds users name and student id to header
+        val headerName = findViewById<TextView>(R.id.headerUsername)
+        val headerStudentid = findViewById<TextView>(R.id.headerStudentID)
+
+        headerName.text = currentUserName
+        headerStudentid.text = currentUserStudentid
     }
 }

@@ -71,12 +71,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+
                     app:cardCornerRadius="10dp"
                     android:elevation="8dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +97,7 @@
                             android:text="Course Recommendations"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textAlignment="center"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

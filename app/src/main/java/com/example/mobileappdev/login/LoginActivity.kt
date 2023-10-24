@@ -1,6 +1,8 @@
 package com.example.mobileappdev.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -77,17 +79,36 @@ class LoginActivity : AppCompatActivity() {
                 try {
                     val response = loginApi.login(username = user, password = pass)
                     Log.d("MelbAPPDemo", response.toString()) // Log the response
+                    getUserData = response
                     loginResponseLiveData.value = response
+                    savedUserData()
                 } catch (e: Exception) {
                     Log.e("MelbAPPDemo", "Network call failed $e")
                     loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
                 }
-
             }
-
-            // Syntax for adding a dataClass into Intent
-            //toDashboard.putExtra("userInfoKey", UserData(studentName = "Bryan France", studentID = "s3892805")
-            //startActivity(toDashboard)
         }
+    }
+    private var getUserData: LoginResponse? = null
+
+    private fun savedUserData() {
+        // Access user info from getUserData
+        val uName = getUserData?.username
+        val uStudentid = getUserData?.studentid
+        val uEmail = getUserData?.email
+        val uPhone = getUserData?.phonenumber
+
+        if (uName != null) {
+            val sharedPreferences: SharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.apply {
+                putString("USERNAME_KEY", uName)
+                putString("USERSTUDENTID_KEY", uStudentid)
+                putString("USEREMAIL_KEY", uEmail)
+                putString("USERPHONE_KEY", uPhone)
+            }.apply()
+        }
+        // Check uName after saving
+        Log.d("MelbAPPDemo", "uName after saving: $uName")
     }
 }
