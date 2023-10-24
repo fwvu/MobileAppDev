@@ -75,6 +75,7 @@
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:itemIconSize="30dp"
-        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"/>
+        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+        app:labelVisibilityMode="labeled"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
