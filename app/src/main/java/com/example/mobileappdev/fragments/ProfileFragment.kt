@@ -1,6 +1,7 @@
 package com.example.mobileappdev.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import com.example.mobileappdev.MainDashboardActivity
 import com.example.mobileappdev.R
+import com.example.mobileappdev.login.LoginActivity
 
 class ProfileFragment : Fragment() {
+
+    private var logoutButton: AppCompatButton? = null
+
+    private val toLogin by lazy {
+        Intent(requireContext(), LoginActivity::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,5 +49,14 @@ class ProfileFragment : Fragment() {
         fragmentName.text = profileName
         fragmentEmail.text = profileEmail
         fragmentPhone.text = profilePhone
+
+        logoutButton = view.findViewById(R.id.logoutButton) as? AppCompatButton
+
+        logoutButton?.setOnClickListener {
+            val sharedPreferencesEditor = sharedPreferences.edit()
+            sharedPreferencesEditor.clear()
+            sharedPreferencesEditor.apply()
+            startActivity(toLogin)
+        }
     }
 }

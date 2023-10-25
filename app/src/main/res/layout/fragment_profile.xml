@@ -225,11 +225,11 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addToScheduleButton"
+                android:id="@+id/logoutButton"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/buttonYellow"
-                android:text="Change Details"
+                android:text="Logout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
